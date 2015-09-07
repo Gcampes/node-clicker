@@ -20,12 +20,9 @@ var socketServer = ws.createServer(function (conn) {
     console.log("New connection")
 
     conn.on("text", function (str) {
-      if(str == 'connect')
-        broadcast(numberWithCommas(counter));
-      else {
+      if(str == 'click')
         counter++;
-        broadcast(numberWithCommas(counter));
-      }
+      broadcast(numberWithCommas(counter));
     })
     conn.on("close", function (code, reason) {
         console.log("Connection closed...")
@@ -39,6 +36,8 @@ function broadcast(counter) {
 	})
 }
 
+
+//Helpers
 function numberWithCommas(x) {
     return x.noExponents().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
